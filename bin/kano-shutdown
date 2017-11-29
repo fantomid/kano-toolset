@@ -128,7 +128,8 @@ class ShutdownOptions(ApplicationWindow):
             os.unlink(dashboard_xsession_file)
 
         # Kill the user desktop session manager and everything below it
-        run_bg('pkill lxsession')
+        whoami=os.environ['USER']
+        run_bg('sudo loginctl kill-user {}'.format(whoami))
 
     def _on_cancel(self, button=None, event=None):
         # If Cancel button or otherwise, terminate the app
